@@ -1,15 +1,15 @@
 const numCards = 16;    // Total cards in game
 const cardTypes = ['fa fa-diamond', 'fa fa-bomb', 'fa fa-paper-plane',  // All the card symbols
     'fa fa-bolt', 'fa fa-cube', 'fa fa-anchor', 'fa fa-leaf', 'fa fa-bicycle'];
-var flippedCards = [];  // Cards that are flipped and need to be checked
-var deck = document.querySelector('.deck'); // Deck element
-var deckLayout = [];    // Deck symbol layout
-var matchedPairs = 0;   // Number of pairs that have been matched
-var flippedCounter = 0; // Number of match attempts
-var time = 0;   // Time elapsed
-var currentMatched = [];    // Current cards that have been matched
-var interval;   // Timer object
-var modal = document.querySelector('.modal');   // Winning modal
+let flippedCards = [];  // Cards that are flipped and need to be checked
+let deck = document.querySelector('.deck'); // Deck element
+let deckLayout = [];    // Deck symbol layout
+let matchedPairs = 0;   // Number of pairs that have been matched
+let flippedCounter = 0; // Number of match attempts
+let time = 0;   // Time elapsed
+let currentMatched = [];    // Current cards that have been matched
+let interval;   // Timer object
+let modal = document.querySelector('.modal');   // Winning modal
 
 // Adds the cards to DOM
 document.addEventListener('DOMContentLoaded', function () {
@@ -41,7 +41,7 @@ function handleCardClick(e) {
 }
 
 // Add event handler for reset button
-var restartButton = document.querySelector('.restart');
+let restartButton = document.querySelector('.restart');
 restartButton.addEventListener('click', handleRestart);
 
 // Event listener for reset button
@@ -129,7 +129,7 @@ function incrementFlip() {
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
@@ -141,7 +141,7 @@ function shuffle(array) {
 }
 
 // Add event handler to modal's close
-var modalClose = document.querySelector('.close-button');
+let modalClose = document.querySelector('.close-button');
 modalClose.addEventListener('click', closeModal);
 
 // Close the modal and reset the game
@@ -153,7 +153,7 @@ function closeModal() {
 // Open winning modal display
 function openModal() {
     modal.classList.toggle('show-modal');
-    for (var i = 0; i < currentMatched.length; i++) {
+    for (let i = 0; i < currentMatched.length; i++) {
         currentMatched[i].classList.toggle('hide');
     }
     let starCount = document.querySelectorAll('.fa.fa-star');
@@ -165,7 +165,7 @@ function openModal() {
 // Reset the game for the player
 function resetGame(won) {
     // Flip the cards over
-    for (var i = 0; i < currentMatched.length; i++) {
+    for (let i = 0; i < currentMatched.length; i++) {
         if (won) {  // Have to set the opacity back to normal
             currentMatched[i].classList.toggle('hide');
         } 
@@ -174,16 +174,25 @@ function resetGame(won) {
         currentMatched[i].classList.toggle('show');
     }
 
+    // Flips the unmatched cards if reset button was pressed
+    if (!won) {
+        for (let i = 0; i < flippedCards.length; i++) {
+            flippedCards[i].classList.toggle('open');
+            flippedCards[i].classList.toggle('show');
+        }
+        flippedCards.length = 0;
+    }
+
     // Shuffle and reset the card layout
     deckLayout = shuffle(deckLayout);
     let cards = document.querySelectorAll('.card');
-    for (var i = 0; i < cards.length; i++) {
+    for (let i = 0; i < cards.length; i++) {
         cards[i].firstElementChild.className = deckLayout[i];
     }
 
     // Reset the stars
     let stars = document.querySelectorAll('.fa.fa-star-o');
-    for (var i = 0; i < stars.length; i++) {
+    for (let i = 0; i < stars.length; i++) {
         stars[i].className = 'fa fa-star';
     }
 
