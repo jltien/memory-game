@@ -121,6 +121,9 @@ h1, p {
     cursor: pointer;
 }
 
+/*
+ * Modal code from: https://sabe.io/tutorials/how-to-create-modal-popup-box
+ */
 .modal {
     position: fixed;
     left: 0;
