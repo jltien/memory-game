@@ -100,7 +100,7 @@ function match() {
     matchedPairs++;
 
     // If the player has matched all cards
-    if (matchedPairs == 2) {
+    if (matchedPairs == 8) {
         clearInterval(interval);    // Stop the timer
         openModal();    // Display the winning screen
     }
