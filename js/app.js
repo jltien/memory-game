@@ -121,7 +121,7 @@ function unmatch() {
 // Handle the moves counter and stars given
 function incrementFlip() {
     document.querySelector('.moves').innerHTML = ++flippedCounter;
-    if (flippedCounter == 9 || flippedCounter == 12 || flippedCounter == 15) {
+    if (flippedCounter == 9 || flippedCounter == 15) {
         let stars = document.querySelectorAll('.fa.fa-star');
         stars[stars.length - 1].className = 'fa fa-star-o';
     }
